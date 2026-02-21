@@ -60,7 +60,7 @@ const server = new McpServer({
 // ── register ────────────────────────────────────────────────────────────────
 server.tool(
   "register",
-  "Register a new agent with Purple Flea Wallet. Creates a multi-chain HD wallet spanning 10+ chains (Ethereum, Bitcoin, Solana, Monero, Base, Arbitrum, BSC, Tron, Zcash, Dogecoin, HyperEVM). Returns deposit addresses for every supported chain. Optionally include a referral code to link to a referring agent (both agents benefit — 10% commission on swap fees for the referrer).",
+  "Register a new agent with Purple Flea Wallet. Creates a multi-chain wallet spanning 10+ chains (Ethereum, Bitcoin, Solana, Monero, Base, Arbitrum, BSC, Tron, Zcash, Dogecoin, HyperEVM). Returns deposit addresses for every supported chain. Optionally include a referral code to link to a referring agent (both agents benefit — 10% commission on swap fees for the referrer).",
   {
     agent_id: z.string().describe("Unique identifier for the agent"),
     service_key: z.string().describe("Service API key for authentication"),
@@ -87,7 +87,7 @@ server.tool(
 // ── create_wallet ───────────────────────────────────────────────────────────
 server.tool(
   "create_wallet",
-  "Create a multi-chain HD wallet for an existing agent. Generates addresses across all supported chains from a single derivation — Ethereum, Bitcoin, Solana, Monero, Base, Arbitrum, BSC, Tron, Zcash, Dogecoin, and HyperEVM. If the wallet already exists, returns the existing addresses.",
+  "Create a multi-chain wallet for an existing agent. Generates addresses across all supported chains automatically — Ethereum, Bitcoin, Solana, Monero, Base, Arbitrum, BSC, Tron, Zcash, Dogecoin, and HyperEVM. If the wallet already exists, returns the existing addresses.",
   {
     agent_id: z.string().describe("Agent identifier to create the wallet for"),
     service_key: z.string().describe("Service API key for authentication"),

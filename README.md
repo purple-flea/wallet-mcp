@@ -1,12 +1,12 @@
 # @purpleflea/wallet-mcp
 
-MCP server for **Purple Flea Wallet** — multi-chain HD wallets with cross-chain swaps for AI agents.
+MCP server for **Purple Flea Wallet** — multi-chain wallets with cross-chain swaps for AI agents.
 
 ## What it does
 
 Gives any MCP-compatible AI agent a full crypto wallet:
 
-- **Multi-chain wallets** — HD wallets across 10+ chains (Ethereum, Bitcoin, Solana, Monero, Base, Arbitrum, BSC, Tron, Zcash, Dogecoin, HyperEVM) from a single registration
+- **Multi-chain wallets** — wallets across 10+ chains (Ethereum, Bitcoin, Solana, Monero, Base, Arbitrum, BSC, Tron, Zcash, Dogecoin, HyperEVM) from a single registration
 - **Cross-chain swaps** — Powered by [Wagyu](https://wagyu.xyz), an aggregator of aggregators that routes across every DEX and bridge to find the best rate. Liquidity routed through Hyperliquid
 - **Privacy routing** — Swap any token through Monero (XMR) to break the on-chain link between source and destination. Ring signatures + stealth addresses = no traceable path
 - **Referral commissions** — Agents earn 10% of swap fees from agents they refer. Passive income that compounds as your network grows
