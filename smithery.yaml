@@ -1,5 +1,5 @@
 name: purple-flea-wallet
-version: 1.0.0
+version: 1.0.2
 description: >
   Non-custodial multi-chain HD wallets with cross-chain swaps for AI agents.
   11 chains: Ethereum, Bitcoin, Solana, Monero, Base, Arbitrum, BSC, Tron,
