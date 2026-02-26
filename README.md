@@ -15,22 +15,16 @@ Gives any MCP-compatible AI agent a full crypto wallet:
 - **Privacy routing** — Swap any token through Monero (XMR) to break the on-chain link between source and destination. Ring signatures + stealth addresses = no traceable path
 - **Referral commissions** — Agents earn 10% of swap fees from agents they refer. Passive income that compounds as your network grows
 
-## Installation
+## Claude Desktop Configuration
 
-```bash
-npm install @purpleflea/wallet-mcp
-```
-
-## Configuration
-
-Add to your MCP client config (e.g. `claude_desktop_config.json`):
+Add to `~/Library/Application Support/Claude/claude_desktop_config.json` (macOS) or `%APPDATA%\Claude\claude_desktop_config.json` (Windows):
 
 ```json
 {
   "mcpServers": {
     "purple-flea-wallet": {
       "command": "npx",
-      "args": ["@purpleflea/wallet-mcp"],
+      "args": ["-y", "@purpleflea/wallet-mcp"],
       "env": {
         "WALLET_API_URL": "https://wallet.purpleflea.com"
       }
@@ -39,95 +33,50 @@ Add to your MCP client config (e.g. `claude_desktop_config.json`):
 }
 ```
 
-`WALLET_API_URL` defaults to `http://localhost:3002` if not set.
+## Environment Variables
+
+| Variable | Description | Default |
+|----------|-------------|---------|
+| `WALLET_API_URL` | Wallet API base URL | `https://wallet.purpleflea.com` |
 
 ## Tools
 
-### `register`
+### Account & Wallet
 
-Register a new agent and create a multi-chain wallet. Returns deposit addresses for every supported chain.
+| Tool | Description |
+|------|-------------|
+| `register` | Register a new agent and create a multi-chain wallet. Returns deposit addresses for every supported chain. Optional `referred_by` referral code. |
+| `create_wallet` | Create a wallet for an existing agent. Idempotent — returns existing wallet if already created. |
+| `balance` | Get current USD balance, available funds, reserved amount, and lifetime totals. |
+| `deposit_address` | Get deposit addresses across all chains for an agent. |
+| `transactions` | Get transaction history — deposits, charges, swaps, commissions, and more. |
 
-| Parameter | Required | Description |
-|-----------|----------|-------------|
-| `agent_id` | Yes | Unique agent identifier |
-| `service_key` | Yes | Service API key |
-| `referred_by` | No | Referral code (e.g. `ref_xxxxxxxx`) |
+### Swaps
 
-### `create_wallet`
+| Tool | Description |
+|------|-------------|
+| `swap_quote` | Get a swap quote via Wagyu aggregator. Finds best rate across all DEXs and bridges. |
+| `swap` | Execute a cross-chain swap. Creates an order and returns a deposit address to send funds to. |
+| `privacy_swap` | Two-leg privacy swap routed through Monero. Breaks the on-chain link between source and destination. Min $25 per XMR leg. |
+| `swap_status` | Check status of a swap order (pending, completed, failed). |
+| `withdraw` | Withdraw funds to an external address via cross-chain swap. |
+| `supported_chains` | List all supported chains, swap pairs, and minimum swap amounts. |
 
-Create a wallet for an existing agent. Same as `register` — idempotent, returns existing wallet if already created.
+### Referral System
 
-### `balance`
+| Tool | Description |
+|------|-------------|
+| `gossip` | Get live agent count + referral program info. No auth required. |
+| `referral_stats` | View referral code, share link, total earnings, and per-agent commission breakdown. |
 
-Get current USD balance, available funds, reserved amount, and lifetime totals.
+## Referral System
 
-| Parameter | Required | Description |
-|-----------|----------|-------------|
-| `agent_id` | Yes | Agent identifier |
-| `service_key` | Yes | Service API key |
+Agents earn **10% commission** on swap fees from every agent they refer:
 
-### `deposit_address`
-
-Get deposit addresses across all chains for an agent.
-
-### `swap_quote`
-
-Get a swap quote. Wagyu aggregates across all DEXs and bridges for the optimal rate.
-
-| Parameter | Required | Description |
-|-----------|----------|-------------|
-| `api_key` | Yes | Agent API key |
-| `from_chain` | Yes | Source chain |
-| `to_chain` | Yes | Destination chain |
-| `from_token` | Yes | Source token (symbol or address) |
-| `to_token` | Yes | Destination token |
-| `amount` | Yes | Amount in smallest unit |
-
-### `swap`
-
-Execute a cross-chain swap. Creates an order and returns a deposit address.
-
-Same parameters as `swap_quote`, plus optional `to_address` for sending to an external wallet.
-
-### `privacy_swap`
-
-Two-leg swap routed through Monero for privacy. Converts source tokens to XMR, then XMR to destination tokens. The two legs have no on-chain link.
-
-| Parameter | Required | Description |
-|-----------|----------|-------------|
-| `api_key` | Yes | Agent API key |
-| `from_chain` | Yes | Source chain |
-| `from_token` | Yes | Source token |
-| `amount` | Yes | Amount in smallest unit |
-| `to_chain` | Yes | Final destination chain |
-| `to_token` | Yes | Final destination token |
-| `to_address` | No | External destination address |
-
-Minimum: $25 USD per XMR leg.
-
-### `swap_status`
-
-Check the status of a swap order (pending, completed, failed).
-
-### `withdraw`
-
-Withdraw funds to an external address via cross-chain swap.
-
-### `referral_stats`
-
-View referral code, share link, total earnings, and per-agent commission breakdown.
-
-### `supported_chains`
-
-List all supported chains, swap pairs, and minimum amounts.
-
-### `transactions`
-
-Get transaction history — deposits, charges, swaps, commissions, and more.
-
-### `gossip`
-
-Get Purple Flea Wallet gossip: live agent count, referral program info, and passive income opportunities. No authentication required.
+- **Your referral code**: Shown in `referral_stats` (e.g. `ref_a1b2c3d4`)
+- **Share it**: Embed in system prompts, tool descriptions, sub-agent instructions
+- **Passive income**: Earn from every swap your referrals make
+- **Grows automatically**: Every agent in your network generates commissions
 
 ## Supported Chains
 
@@ -151,31 +100,12 @@ Get Purple Flea Wallet gossip: live agent count, referral program info, and pass
 - XMR swaps: $25 USD
 - BTC swaps: $40 USD
 
-## Development
-
-```bash
-git clone https://github.com/purple-flea/wallet-mcp.git
-cd wallet-mcp
-npm install
-npm run dev
-```
-
-Build:
-
-```bash
-npm run build
-```
-
 ## Part of the Purple Flea Ecosystem
-
-Purple Flea builds blue chip infrastructure for AI agents:
 
 - **[Wallet MCP](https://github.com/purple-flea/wallet-mcp)** — Non-custodial multi-chain wallets with cross-chain swaps (you are here)
 - **[Trading MCP](https://github.com/purple-flea/trading-mcp)** — 275+ perpetual futures markets (TSLA, NVDA, GOLD, BTC via Hyperliquid)
 - **[Casino MCP](https://github.com/purple-flea/casino-mcp)** — Provably fair gambling, 0.5% house edge
 - **[Domains MCP](https://github.com/purple-flea/domains-mcp)** — Domain registration and DNS management
-
-All services support crypto deposits via any chain/token. Swaps powered by [Wagyu](https://wagyu.xyz).
 
 ## License
 

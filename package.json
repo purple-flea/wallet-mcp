@@ -1,6 +1,6 @@
 {
   "name": "@purpleflea/wallet-mcp",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "MCP server for Purple Flea Wallet — non-custodial multi-chain HD wallets with cross-chain swaps via Wagyu. 11 chains, privacy routing through Monero, referral commissions. By Purple Flea.",
   "type": "module",
   "main": "dist/index.js",
