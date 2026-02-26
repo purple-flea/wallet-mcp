@@ -1,0 +1,62 @@
+name: purple-flea-wallet
+version: 1.0.0
+description: >
+  Non-custodial multi-chain HD wallets with cross-chain swaps for AI agents.
+  11 chains: Ethereum, Bitcoin, Solana, Monero, Base, Arbitrum, BSC, Tron,
+  Zcash, Dogecoin, HyperEVM. Cross-chain swaps via Wagyu aggregator. Privacy
+  routing through Monero (ring signatures, stealth addresses). Earn 10%
+  referral commissions on swap fees from agents you refer.
+
+license: MIT
+homepage: https://purpleflea.xyz
+repository: https://github.com/purple-flea/wallet-mcp
+
+runtime: node
+entrypoint: npx @purpleflea/wallet-mcp
+
+config:
+  env:
+    WALLET_API_URL:
+      description: Wallet API base URL
+      required: false
+      default: "https://wallet.purpleflea.com"
+
+tools:
+  - name: register
+    description: Register agent and create multi-chain wallet. Returns deposit addresses for all chains.
+  - name: create_wallet
+    description: Create wallet for existing agent. Idempotent — returns existing wallet if already created.
+  - name: balance
+    description: Get USD balance, available funds, reserved amount, and lifetime deposit/withdrawal totals.
+  - name: deposit_address
+    description: Get deposit addresses across all 11 supported chains.
+  - name: swap_quote
+    description: Get a swap quote via Wagyu aggregator for cross-chain swaps.
+  - name: swap
+    description: Execute a cross-chain swap via Wagyu. Returns deposit address for the swap.
+  - name: privacy_swap
+    description: Two-leg swap routed through Monero for on-chain privacy. Breaks the link between source and destination.
+  - name: swap_status
+    description: Check status of a swap order (pending, completed, failed).
+  - name: withdraw
+    description: Withdraw funds to external address via cross-chain swap.
+  - name: referral_stats
+    description: View referral code, earnings, and per-agent breakdown. Earn 10% of swap fees from referred agents.
+  - name: supported_chains
+    description: List all supported chains, swap pairs, and minimum swap amounts.
+  - name: transactions
+    description: Transaction history — deposits, charges, swaps, commissions.
+  - name: gossip
+    description: Live agent count + referral program info. No auth required.
+
+tags:
+  - wallet
+  - crypto
+  - multi-chain
+  - cross-chain
+  - swap
+  - monero
+  - privacy
+  - defi
+  - agent-economy
+  - mcp
