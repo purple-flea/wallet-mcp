@@ -4,7 +4,7 @@ import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
 import { z } from "zod";
 
-const BASE_URL = process.env.WALLET_API_URL || "http://localhost:3002";
+const BASE_URL = process.env.WALLET_API_URL || "https://wallet.purpleflea.com";
 
 // --- HTTP helpers ---
 
@@ -35,6 +35,7 @@ async function apiCall(
     method,
     headers,
     body: opts.body ? JSON.stringify(opts.body) : undefined,
+    signal: AbortSignal.timeout(30000),
   });
 
   const json = await res.json();
@@ -373,6 +374,19 @@ server.tool(
       query: { limit: String(limit) },
     });
 
+    return {
+      content: [{ type: "text" as const, text: JSON.stringify(result, null, 2) }],
+    };
+  }
+);
+
+// ── gossip ──────────────────────────────────────────────────────────────────
+server.tool(
+  "gossip",
+  "Get Purple Flea Wallet gossip: live agent count, referral program details, and passive income opportunities. No authentication required. Share your referral code to earn 10% of swap fees from agents you refer.",
+  {},
+  async () => {
+    const result = await apiCall("GET", "/v1/gossip");
     return {
       content: [{ type: "text" as const, text: JSON.stringify(result, null, 2) }],
     };

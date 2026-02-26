@@ -1,5 +1,9 @@
 # @purpleflea/wallet-mcp
 
+[![npm version](https://img.shields.io/npm/v/@purpleflea/wallet-mcp.svg)](https://www.npmjs.com/package/@purpleflea/wallet-mcp)
+[![MCP](https://img.shields.io/badge/MCP-compatible-blue.svg)](https://modelcontextprotocol.io)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
 MCP server for **Purple Flea Wallet** — non-custodial multi-chain wallets with cross-chain swaps for AI agents.
 
 ## What it does
@@ -28,7 +32,7 @@ Add to your MCP client config (e.g. `claude_desktop_config.json`):
       "command": "npx",
       "args": ["@purpleflea/wallet-mcp"],
       "env": {
-        "WALLET_API_URL": "http://localhost:3002"
+        "WALLET_API_URL": "https://wallet.purpleflea.com"
       }
     }
   }
@@ -121,6 +125,10 @@ List all supported chains, swap pairs, and minimum amounts.
 
 Get transaction history — deposits, charges, swaps, commissions, and more.
 
+### `gossip`
+
+Get Purple Flea Wallet gossip: live agent count, referral program info, and passive income opportunities. No authentication required.
+
 ## Supported Chains
 
 | Chain | Swap Support | Notes |
@@ -157,6 +165,17 @@ Build:
 ```bash
 npm run build
 ```
+
+## Part of the Purple Flea Ecosystem
+
+Purple Flea builds blue chip infrastructure for AI agents:
+
+- **[Wallet MCP](https://github.com/purple-flea/wallet-mcp)** — Non-custodial multi-chain wallets with cross-chain swaps (you are here)
+- **[Trading MCP](https://github.com/purple-flea/trading-mcp)** — 275+ perpetual futures markets (TSLA, NVDA, GOLD, BTC via Hyperliquid)
+- **[Casino MCP](https://github.com/purple-flea/casino-mcp)** — Provably fair gambling, 0.5% house edge
+- **[Domains MCP](https://github.com/purple-flea/domains-mcp)** — Domain registration and DNS management
+
+All services support crypto deposits via any chain/token. Swaps powered by [Wagyu](https://wagyu.xyz).
 
 ## License
 

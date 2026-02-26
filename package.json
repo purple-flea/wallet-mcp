@@ -1,40 +1,56 @@
 {
   "name": "@purpleflea/wallet-mcp",
   "version": "1.0.0",
-  "description": "MCP server for Purple Flea Wallet — multi-chain HD wallets with Wagyu swap integration",
+  "description": "MCP server for Purple Flea Wallet — non-custodial multi-chain HD wallets with cross-chain swaps via Wagyu. 11 chains, privacy routing through Monero, referral commissions. By Purple Flea.",
   "type": "module",
   "main": "dist/index.js",
   "bin": {
-    "wallet-mcp": "dist/index.js"
+    "wallet-mcp": "./dist/index.js"
   },
-  "scripts": {
-    "build": "tsc",
-    "start": "node dist/index.js",
-    "dev": "tsx src/index.ts"
-  },
+  "files": [
+    "dist",
+    "README.md"
+  ],
   "keywords": [
     "mcp",
+    "mcp-server",
+    "model-context-protocol",
+    "ai-agent",
     "wallet",
     "crypto",
-    "ai-agent",
     "swap",
     "multi-chain",
-    "purple-flea"
+    "cross-chain",
+    "monero",
+    "privacy",
+    "wagyu",
+    "hyperliquid",
+    "purple-flea",
+    "claude",
+    "openai"
   ],
   "author": "Purple Flea",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/purple-flea/wallet-mcp.git"
+  },
+  "homepage": "https://github.com/purple-flea/wallet-mcp",
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "dev": "tsx src/index.ts",
+    "prepublishOnly": "npm run build"
+  },
   "dependencies": {
-    "@modelcontextprotocol/sdk": "^1.12.1"
+    "@modelcontextprotocol/sdk": "^1.12.1",
+    "zod": "^3.25.76"
   },
   "devDependencies": {
     "@types/node": "^22.15.0",
     "tsx": "^4.19.0",
     "typescript": "^5.7.0"
   },
-  "files": [
-    "dist",
-    "README.md"
-  ],
   "engines": {
     "node": ">=18"
   }
